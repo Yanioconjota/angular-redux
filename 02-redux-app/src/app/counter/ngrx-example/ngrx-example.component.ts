@@ -18,10 +18,8 @@ export class NgrxExampleComponent implements OnInit {
   counter: number | undefined;
 
   constructor(private store: Store<AppState>) {
-    this.store.subscribe( state => {
-      console.log(state);
-      this.counter = state.counter;
-    })
+    //The select method allow us to subscribe to one state property only rather than the whole state this.store.subscribe(state)=>... and the subscribes is triggered only when that property changes
+    this.store.select('counter').subscribe(counter => this.counter = counter);
   }
 
   ngOnInit(): void {

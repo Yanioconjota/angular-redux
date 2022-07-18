@@ -14,10 +14,8 @@ export class AppComponent {
 
   constructor(private store: Store<AppState>) {
     this.counter = 10;
-    this.store.subscribe( state => {
-      console.log(state);
-      this.counter = state.counter;
-    })
+    //The select method allow us to subscribe to one state property only rather than the whole state this.store.subscribe(state)=>... and the subscribes is triggered only when that property changes
+    this.store.select('counter').subscribe(counter => this.counter = counter);
   }
 
   increase():void {
