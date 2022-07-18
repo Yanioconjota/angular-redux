@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/app.reducers';
 import * as actions from '../counter.actions';
-
-//This interface has the same type declared module in which the stored was imported -->  StoreModule.forRoot({ counter: counterReducer })
-interface AppState {
-  counter: number;
-}
 
 @Component({
   selector: 'app-ngrx-example',
@@ -31,6 +27,14 @@ export class NgrxExampleComponent implements OnInit {
 
   decrement(): void {
     this.store.dispatch(actions.decrement())
+  }
+
+  multiply():void {
+    this.store.dispatch(actions.multiply({number: 2}))
+  }
+
+  divide():void {
+    this.store.dispatch(actions.divide({number: 2}))
   }
 
   reset(): void {
