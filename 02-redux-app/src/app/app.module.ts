@@ -11,12 +11,14 @@ import { counterReducer } from './counter/counter.reducer';
 import { AppComponent } from './app.component';
 import { ChildComponent } from './counter/child/child.component';
 import { GrandchildComponent } from './counter/grandchild/grandchild.component';
+import { NgrxExampleComponent } from './counter/ngrx-example/ngrx-example.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChildComponent,
-    GrandchildComponent
+    GrandchildComponent,
+    NgrxExampleComponent
   ],
   imports: [
     BrowserModule,

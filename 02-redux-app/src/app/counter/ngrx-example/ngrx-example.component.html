@@ -1,0 +1,17 @@
+<div class="row text-center">
+  <div class="col-12">
+    <h3>Counter in ngrx component
+    </h3>
+    <h4>{{ counter }}</h4>
+    <p>button group in another child compinent using ngrx library</p>
+    <div class="btn-group">
+      <div class="btn btn-primary" (click)="increment()">Increase by 1</div>
+      <div class="btn btn-secondary" (click)="decrement()">Decrease by 1</div>
+      <div class="btn btn-info" (click)="reset()">Reset</div>
+    </div>
+  </div>
+  <div class="col-xs-12 mt-3">
+    <p>In this component we use no input or output decorators, counter data is received by subscribing to the store in which we receive the state and its changes.</p>
+    <p>The counter data is altered by using a reducer and its actions</p>
+  </div>
+</div>

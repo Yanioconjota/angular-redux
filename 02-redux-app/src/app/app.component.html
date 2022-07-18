@@ -13,6 +13,9 @@
         <div class="btn btn-secondary" (click)="decrease()">Decrease by 1</div>
       </div>
     </div>
+    <div class="col-xs-12 mt-3">
+      <p>The counter data is passed and received using traditional decorators like input and output respectively</p>
+    </div>
   </div>
 
   <hr>
@@ -22,4 +25,13 @@
       <app-child [counter]="counter" (updateCounter)="counter = $event"></app-child>
     </div>
   </div>
+
+  <hr>
+
+  <div class="row text-center">
+    <div class="col-12">
+      <app-ngrx-example></app-ngrx-example>
+    </div>
+  </div>
+
 </div>

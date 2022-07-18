@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
 
+interface AppState {
+  counter: number;
+}
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,8 +12,12 @@ import { Component } from '@angular/core';
 export class AppComponent {
   counter: number;
 
-  constructor() {
+  constructor(private store: Store<AppState>) {
     this.counter = 10;
+    this.store.subscribe( state => {
+      console.log(state);
+      this.counter = state.counter;
+    })
   }
 
   increase():void {
