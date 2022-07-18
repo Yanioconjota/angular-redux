@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row text-center">
+    <div class="col-12">
+      <h1>Counter</h1>
+      <h2>{{ counter }}</h2>
+    </div>
+  </div>
+
+  <div class="row text-center">
+    <div class="col-12">
+      <div class="btn-group">
+        <div class="btn btn-primary" (click)="increase()">Increase by 1</div>
+        <div class="btn btn-secondary" (click)="decrease()">Decrease by 1</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row text-center">
+    <div class="col-12">
+      <app-child [counter]="counter" (updateCounter)="counter = $event"></app-child>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<h3>Counter in child component
+  <h4>{{ counter }}</h4>
+</h3>
+
+<div class="row text-center">
+  <div class="col-12">
+    <p>button group in child compinent</p>
+    <div class="btn-group">
+      <div class="btn btn-primary" (click)="multiply()">Multiply by 2</div>
+      <div class="btn btn-secondary" (click)="divide()">Divide by 2</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="row text-center">
+  <div class="col-12">
+    <app-grandchild [counter]="counter" (updateCounter)="resetFromGrandchild($event)"></app-grandchild>
+  </div>
+</div>
