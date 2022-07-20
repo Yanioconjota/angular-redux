@@ -2,7 +2,9 @@ import { createReducer, on } from '@ngrx/store';
 import { Todo } from './models/todo.model';
 import { createTodo } from './todos.actions';
 
-export const initialState: Todo[] = [];
+export const initialState: Todo[] = [
+  new Todo('Eat some pizza')
+];
 
 /*
 createTodo: receives the props,
