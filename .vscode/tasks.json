@@ -1,0 +1,25 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "start",
+			"path": "02-redux-app",
+			"problemMatcher": [],
+			"isBackground": true,
+			"presentation": { "reveal": "silent" },
+			"label": "npm: start - 02-redux-app",
+			"detail": "ng serve --port 4202 && start firefox http://localhost:4202"
+		},
+		{
+			"type": "npm",
+			"script": "start",
+			"path": "03-todo-app",
+			"problemMatcher": [],
+			"isBackground": true,
+			"presentation": { "reveal": "silent" },
+			"label": "npm: start - 03-todo-app",
+			"detail": "ng serve --port 4203 && start firefox http://localhost:4203"
+		},
+	]
+}
