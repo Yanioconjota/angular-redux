@@ -1,3 +1,4 @@
 <ul class="todo-list">
-  <app-todo-item *ngFor="let todo of todos" [todo]="todo"></app-todo-item>
+  <!-- We added a custom filter: Info on the component -->
+  <app-todo-item *ngFor="let todo of todos | todoFilter: currentFilter" [todo]="todo"></app-todo-item>
 </ul>

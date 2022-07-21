@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducer';
+import { validFilters } from 'src/app/filters/filter.actions';
 import { Todo } from '../models/todo.model';
 
 @Component({
@@ -11,12 +12,16 @@ import { Todo } from '../models/todo.model';
 export class TodoListComponent implements OnInit {
 
   todos: Todo[] = [];
+  currentFilter: validFilters = 'all';
 
   constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
-    this.store.select('todos')
-      .subscribe(todos => this.todos = todos);
+    //By subscribing to the state we pass the filter property to our custom pipe to show todos by completion status, we can also destructure the state by replacing it for { todos, filter }, that's your call.
+    this.store.subscribe(state => {
+      this.todos = state.todos;
+      this.currentFilter = state.filter;
+    });
   }
 
 }
