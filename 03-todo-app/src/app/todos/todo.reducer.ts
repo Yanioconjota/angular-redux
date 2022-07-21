@@ -3,7 +3,10 @@ import { Todo } from './models/todo.model';
 import { createTodo } from './todos.actions';
 
 export const initialState: Todo[] = [
-  new Todo('Eat some pizza')
+  new Todo('Eat some pizza'),
+  new Todo('Get some Campari tonic'),
+  new Todo('Code something'),
+  new Todo('Go to the gym... Ha...'),
 ];
 
 /*
