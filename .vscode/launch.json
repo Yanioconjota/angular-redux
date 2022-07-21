@@ -9,15 +9,15 @@
     {
       "type": "chrome",
       "request": "launch",
-      "preLaunchTask": "npm: start - 02-redux-app",
+      "preLaunchTask": "npm: serve - 02-redux-app",
       "name": "02-REDUX-APP",
       "url": "http://localhost:4202",
       "webRoot": "${workspaceFolder}/02-redux-app"
     },
     {
-      "type": "pwa-chrome",
+      "type": "chrome",
       "request": "launch",
-      "preLaunchTask": "npm: start - 03-todo-app",
+      "preLaunchTask": "npm: serve - 03-todo-app",
       "name": "03-TODO-APP",
       "url": "http://localhost:4203",
       "webRoot": "${workspaceFolder}/03-todo-app"

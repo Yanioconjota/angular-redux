@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 4203 && start firefox http://localhost:4203",
+    "start": "start firefox http://localhost:4203 && ng serve --port 4203",
+    "serve": "ng serve --port 4203",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
