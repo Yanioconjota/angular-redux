@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducer';
 import { setFilter, validFilters } from 'src/app/filters/filter.actions';
+import { clearCompleted } from '../todos.actions';
 
 @Component({
   selector: 'app-todo-footer',
@@ -17,18 +18,19 @@ export class TodoFooterComponent implements OnInit {
   constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
-    /* this.store.select('filter').subscribe( filter => {
-      this.currentFilter = filter;
-    }); */
 
     this.store.subscribe(state => {
       this.currentFilter = state.filter;
-      this.pending = state.todos.filter( todo => !todo.completed).length
+      this.pending = state.todos.filter( todo => !todo.completed).length;
     })
   }
 
   changeFilter(filter: validFilters): void {
     this.store.dispatch(setFilter({ filter: filter }));
+  }
+
+  clearCompleted() {
+    this.store.dispatch(clearCompleted());
   }
 
 }
