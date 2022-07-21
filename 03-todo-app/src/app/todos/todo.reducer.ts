@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Todo } from './models/todo.model';
-import { createTodo, toggleTodo, editTodo } from './todos.actions';
+import { createTodo, toggleTodo, editTodo, deleteTodo } from './todos.actions';
 
 export const initialState: Todo[] = [
   new Todo('Eat some pizza'),
@@ -37,4 +37,6 @@ export const todoReducer = createReducer(
       return todo.id === id ? { ...todo, text: text } : todo
     });
   }),
+  //Returns a new array with all todos but the one matching the id received
+  on(deleteTodo, (state, {id}) => state.filter( todo => todo.id !== id ))
 );
