@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Todo } from '../models/todo.model';
 import { AppState } from 'src/app/app.reducer';
-import { toggleTodo } from '../todos.actions';
+import { editTodo, toggleTodo } from '../todos.actions';
 
 @Component({
   selector: 'app-todo-item',
@@ -31,6 +31,8 @@ export class TodoItemComponent implements OnInit {
 
   edit(): void {
     this.editing = true;
+    //Prevents the input to go blank when entering in input mode
+    this.txtInput.setValue(this.todo.text);
     setTimeout(() => {
       this.editingInput.nativeElement.select();
     }, 1);
@@ -38,6 +40,18 @@ export class TodoItemComponent implements OnInit {
 
   endEditing() {
     this.editing = false;
+
+    //Prevents to add empty string as a value
+    if (this.txtInput.invalid) return;
+    //Prevents to trigger the action when the value doesn't chang
+    if (this.txtInput.value === this.todo.text) return;
+
+    this.store.dispatch(editTodo(
+      {
+        id: this.todo.id,
+        text: this.txtInput.value
+      }
+    ));
   }
 
 }

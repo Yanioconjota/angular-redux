@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Todo } from './models/todo.model';
-import { createTodo, toggleTodo } from './todos.actions';
+import { createTodo, toggleTodo, editTodo } from './todos.actions';
 
 export const initialState: Todo[] = [
   new Todo('Eat some pizza'),
@@ -27,6 +27,14 @@ export const todoReducer = createReducer(
       */
 
       return todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    });
+  }),
+  on(editTodo, (state, { id, text }) => {
+    return state.map(todo => {
+      /*
+      Works pretty much the same as toggleTodo but instead of changing the completed status we pass a new text property with the text received as argument
+      */
+      return todo.id === id ? { ...todo, text: text } : todo
     });
   }),
 );
