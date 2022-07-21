@@ -8,7 +8,7 @@ import { TodoModule } from './todos/todo.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
-import { todoReducer } from './todos/todo.reducer';
+import { appReducers } from './app.reducer';
 
 //Components
 import { AppComponent } from './app.component';
@@ -26,7 +26,7 @@ import { FooterComponent } from './footer/footer.component';
     ReactiveFormsModule,
     AppRoutingModule,
     TodoModule,
-    StoreModule.forRoot({ todos: todoReducer }),
+    StoreModule.forRoot(appReducers),//Instead of { todos: todoReducer } we call appReducers which manage all reducers saved in the store
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
