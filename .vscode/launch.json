@@ -21,6 +21,14 @@
       "name": "03-TODO-APP",
       "url": "http://localhost:4203",
       "webRoot": "${workspaceFolder}/03-todo-app"
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "preLaunchTask": "npm: serve - 04-dashboard-app",
+      "name": "03-DASHBOARD-APP",
+      "url": "http://localhost:4203",
+      "webRoot": "${workspaceFolder}/04-dashboard-app"
     }
   ]
 }
