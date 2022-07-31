@@ -34,11 +34,43 @@ When creating a project with firebase Authentication and Firebase DB first do th
       }
     }
   ```
-10. Scroll down and Click on </> 
-11. register app by creating a name and click register app
-12. Click continue to console
-13. Go to your project console and type: `firebase login`
-14. Then add angular fire to your project: `ng add @angular/fire`
-15. Select `Authentication` and `Firestore` in the application list when prompted
-16. Select your firebase account `****@email.com` when prompted
-17. Make sure your app is OK by running `npm start` or `ng serve`
+11. Scroll down and Click on </> 
+12. register app by creating a name and click register app
+13. Click continue to console
+14. Go to your project console and type: `firebase login`
+15. Then add angular fire to your project: `ng add @angular/fire`
+16. Select `Authentication` and `Firestore` in the application list when prompted
+17. Select your firebase account `****@email.com` when prompted
+18. Go to your app module and find this blocks:
+  ```
+    import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+    import { provideAuth,getAuth } from '@angular/fire/auth';
+    import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+  ```
+  and:
+  ```
+    imports: [
+      BrowserModule,
+      AppRoutingModule,
+      ReactiveFormsModule,
+      provideFirebaseApp(() => initializeApp(environment.firebase)),
+      provideAuth(() => getAuth()),
+      provideFirestore(() => getFirestore())
+    ],
+  ```
+19. Replace it for:
+  ```
+    import { AngularFireModule } from '@angular/fire/compat';
+  ```
+  ```
+    imports: [
+      BrowserModule,
+      AppRoutingModule,
+      ReactiveFormsModule,
+      AngularFireModule.initializeApp(environment.firebase),
+      AngularFireAnalyticsModule,
+      AngularFirestoreModule,
+      AngularFireAuthModule,
+    ],
+  ```
+20. Make sure your app is OK by running `npm start` or `ng serve`
