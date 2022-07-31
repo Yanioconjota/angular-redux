@@ -34,4 +34,18 @@ export class RegisterComponent implements OnInit {
     console.log(this.registerForm.value);
   }
 
+  inputValidationStyle(fieldName: string): string {
+    fieldName.trim().toLowerCase();
+    switch (fieldName) {
+      case 'name':
+        return this.validName ? 'text-success fa-check-circle' : 'text-danger fa-times-circle'
+      case 'email':
+        return this.validEmail ? 'text-success fa-check-circle' : 'text-danger fa-times-circle'
+      case 'password':
+        return this.validPassword ? 'text-success fa-check-circle' : 'text-danger fa-times-circle'
+      default:
+        return ''
+    }
+  }
+
 }
