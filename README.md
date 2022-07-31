@@ -20,9 +20,9 @@ When creating a project with firebase Authentication and Firebase DB first do th
 2. Create a project
 3. Go to Authentication and select your authentication methods in the sign-in method tab such as email, facebook, google...
 4. Then click on Firebase database and create your DB
-8. Add your Firebase SDK by clicking on the cog wheel next to Project overview and select project settings
-9. Select prod mode
-10. Go to rules and replace the match rules with the following code: (you will change it later)
+5. Add your Firebase SDK by clicking on the cog wheel next to Project overview and select project settings
+6. Select prod mode
+7. Go to rules and replace the match rules with the following code: (you will change it later)
   ```
     rules_version = '2';
     service cloud.firestore {
@@ -34,14 +34,14 @@ When creating a project with firebase Authentication and Firebase DB first do th
       }
     }
   ```
-11. Scroll down and Click on </> 
-12. register app by creating a name and click register app
-13. Click continue to console
-14. Go to your project console and type: `firebase login`
-15. Then add angular fire to your project: `ng add @angular/fire`
-16. Select `Authentication` and `Firestore` in the application list when prompted
-17. Select your firebase account `****@email.com` when prompted
-18. Go to your app module and find this blocks:
+8. Scroll down and Click on </> 
+9. register app by creating a name and click register app
+10. Click continue to console
+11. Go to your project console and type: `firebase login`
+12. Then add angular fire to your project: `ng add @angular/fire`
+13. Select `Authentication` and `Firestore` in the application list when prompted
+14. Select your firebase account `****@email.com` when prompted
+15. Go to your app module and find this blocks:
   ```
     import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
     import { provideAuth,getAuth } from '@angular/fire/auth';
@@ -58,7 +58,7 @@ When creating a project with firebase Authentication and Firebase DB first do th
       provideFirestore(() => getFirestore())
     ],
   ```
-19. Replace it for:
+16. Replace it for:
   ```
     import { AngularFireModule } from '@angular/fire/compat';
   ```
@@ -73,4 +73,4 @@ When creating a project with firebase Authentication and Firebase DB first do th
       AngularFireAuthModule,
     ],
   ```
-20. Make sure your app is OK by running `npm start` or `ng serve`
+17. Make sure your app is OK by running `npm start` or `ng serve`
