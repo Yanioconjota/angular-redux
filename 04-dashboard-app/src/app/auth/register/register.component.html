@@ -11,7 +11,7 @@
                 <input type="text" class="form-control" placeholder="Name" formControlName="name">
                 <div class="input-group-append">
                   <span class="input-group-text">
-                    <i *ngIf="touchedName"
+                    <i *ngIf="showError('name')"
                        [ngClass]="inputValidationStyle('name')"
                     class="fa fa-check-circle text-success"></i>
                   </span>
@@ -24,7 +24,7 @@
                 <input type="email" class="form-control" placeholder="Email" formControlName="email">
                 <div class="input-group-append">
                   <span class="input-group-text">
-                    <i *ngIf="touchedName"
+                    <i *ngIf="showError('email')"
                        [ngClass]="inputValidationStyle('email')"
                     class="fa fa-check-circle text-success"></i>
                   </span>
@@ -37,7 +37,7 @@
                 <input type="password" class="form-control" placeholder="Password" formControlName="password">
                 <div class="input-group-append">
                   <span class="input-group-text">
-                    <i *ngIf="touchedName"
+                    <i *ngIf="showError('password')"
                        [ngClass]="inputValidationStyle('password')"
                     class="fa fa-check-circle text-success"></i>
                   </span>
