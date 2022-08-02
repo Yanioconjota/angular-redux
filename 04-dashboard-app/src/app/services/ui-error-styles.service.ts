@@ -16,4 +16,9 @@ export class ValidatorService {
     return form.get(field)?.touched || form.get(field)?.dirty;
   }
 
+  inputValidationStyle(form: FormGroup,fieldName: string): string {
+    fieldName = fieldName.trim().toLowerCase();
+    return this.validField(form, fieldName) ? 'text-success fa-check-circle' : 'text-danger fa-times-circle';
+  }
+
 }

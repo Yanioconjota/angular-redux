@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { ValidatorService } from 'src/app/services/validator.service';
+import { ValidatorService } from 'src/app/services/ui-error-styles.service';
 
 @Component({
   selector: 'app-register',
@@ -13,6 +13,7 @@ import { ValidatorService } from 'src/app/services/validator.service';
 export class RegisterComponent implements OnInit {
 
   registerForm!: FormGroup;
+  emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
@@ -23,10 +24,14 @@ export class RegisterComponent implements OnInit {
     return this.customValidator.touchedField(this.registerForm, field)
   }
 
+  iconError(fieldName: string) {
+    return this.customValidator.inputValidationStyle(this.registerForm, fieldName);
+  }
+
   ngOnInit(): void {
     this.registerForm = this.fb.group({
       name: [ '', Validators.required ],
-      email: [ '',  [Validators.required, Validators.email] ],
+      email: [ '',  [Validators.required, Validators.pattern(this.emailPattern)] ],
       password: [ '', [Validators.required, Validators.minLength(6)] ]
     });
   }
@@ -45,19 +50,4 @@ export class RegisterComponent implements OnInit {
         console.log(err);
       })
   }
-
-  inputValidationStyle(fieldName: string): string {
-    fieldName.trim().toLowerCase();
-    switch (fieldName) {
-      case 'name':
-        return this.customValidator.validField(this.registerForm, 'name') ? 'text-success fa-check-circle' : 'text-danger fa-times-circle'
-      case 'email':
-        return this.customValidator.validField(this.registerForm, 'email') ? 'text-success fa-check-circle' : 'text-danger fa-times-circle'
-      case 'password':
-        return this.customValidator.validField(this.registerForm, 'password') ? 'text-success fa-check-circle' : 'text-danger fa-times-circle'
-      default:
-        return ''
-    }
-  }
-
 }
