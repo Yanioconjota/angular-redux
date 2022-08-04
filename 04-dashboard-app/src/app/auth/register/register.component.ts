@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { emailPattern } from '../../shared/consts'
 import { AuthService } from 'src/app/services/auth.service';
-import { UiErrorMessagesService } from 'src/app/services/ui-error-styles.service';
+import { UiErrorMessagesService } from 'src/app/services/ui-error-messages.service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +15,6 @@ export class RegisterComponent implements OnInit {
 
   registerForm!: FormGroup;
   emailPattern = emailPattern;
-  errorMessage! : string;
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
@@ -49,13 +48,10 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['/']);
       })
       .catch(err => {
-        this.errorMessage = err;
-        setTimeout(() => {
-          this.errorMessage = '';
-          return Object.values( this.registerForm.controls ).forEach( control => {
+        this.customValidator.errorModal(err);
+        return Object.values( this.registerForm.controls ).forEach( control => {
             control.setValue('')
           });
-        }, 2500);
       })
   }
 }

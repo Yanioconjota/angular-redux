@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { UiErrorMessagesService } from 'src/app/services/ui-error-styles.service';
+import { UiErrorMessagesService } from 'src/app/services/ui-error-messages.service';
 import { emailPattern } from 'src/app/shared/consts';
 
 @Component({
@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
   emailPattern = emailPattern;
-  errorMessage! : string;
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
@@ -48,14 +47,11 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/']);
       })
       .catch(err => {
-        this.errorMessage = err;
-        setTimeout(() => {
-          this.errorMessage = '';
-          return Object.values( this.loginForm.controls ).forEach( control => {
-            control.setValue('')
-          });
-        }, 2500);
-      })
+        this.customValidator.errorModal(err);
+        return Object.values( this.loginForm.controls ).forEach( control => {
+          control.setValue('');
+        });
+      });
   }
 
 }

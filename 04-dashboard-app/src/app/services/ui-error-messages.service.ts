@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import Swal from 'sweetalert2'
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,15 @@ export class UiErrorMessagesService {
   inputValidationStyle(form: FormGroup,fieldName: string): string {
     fieldName = fieldName.trim().toLowerCase();
     return this.validField(form, fieldName) ? 'text-success fa-check-circle' : 'text-danger fa-times-circle';
+  }
+
+  errorModal(err: string) {
+    Swal.fire({
+    title: 'Error!',
+    text: err,
+    icon: 'error',
+    confirmButtonText: 'Cool'
+  })
   }
 
 }
