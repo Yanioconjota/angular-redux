@@ -22,13 +22,14 @@ export class UiErrorMessagesService {
     return this.validField(form, fieldName) ? 'text-success fa-check-circle' : 'text-danger fa-times-circle';
   }
 
-  errorModal(err: string) {
+  errorModal(err: any) {
+    const { message } = err;
     Swal.fire({
-    title: 'Error!',
-    text: err,
-    icon: 'error',
-    confirmButtonText: 'Cool'
-  })
+      title: 'Error!',
+      text: message,
+      icon: 'error',
+      confirmButtonText: 'Cool'
+    });
   }
 
 }
