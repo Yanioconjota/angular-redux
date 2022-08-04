@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 @Injectable({
   providedIn: 'root'
 })
-export class ValidatorService {
+export class UiErrorMessagesService {
 
   constructor() { }
 

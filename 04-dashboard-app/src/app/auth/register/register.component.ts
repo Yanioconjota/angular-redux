@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { emailPattern } from '../../shared/consts'
 import { AuthService } from 'src/app/services/auth.service';
-import { ValidatorService } from 'src/app/services/ui-error-styles.service';
+import { UiErrorMessagesService } from 'src/app/services/ui-error-styles.service';
 
 @Component({
   selector: 'app-register',
@@ -15,19 +15,12 @@ export class RegisterComponent implements OnInit {
 
   registerForm!: FormGroup;
   emailPattern = emailPattern;
+  errorMessage! : string;
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
               private router: Router,
-              private customValidator: ValidatorService) { }
-
-  showError(field: string) {
-    return this.customValidator.touchedField(this.registerForm, field)
-  }
-
-  iconError(fieldName: string) {
-    return this.customValidator.inputValidationStyle(this.registerForm, fieldName);
-  }
+              private customValidator: UiErrorMessagesService) { }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -35,6 +28,14 @@ export class RegisterComponent implements OnInit {
       email: [ '',  [Validators.required, Validators.pattern(this.emailPattern)] ],
       password: [ '', [Validators.required, Validators.minLength(6)] ]
     });
+  }
+
+  showError(field: string) {
+    return this.customValidator.touchedField(this.registerForm, field)
+  }
+
+  iconError(fieldName: string) {
+    return this.customValidator.inputValidationStyle(this.registerForm, fieldName);
   }
 
   createUser(): void {
@@ -48,7 +49,13 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['/']);
       })
       .catch(err => {
-        console.log(err);
+        this.errorMessage = err;
+        setTimeout(() => {
+          this.errorMessage = '';
+          return Object.values( this.registerForm.controls ).forEach( control => {
+            control.setValue('')
+          });
+        }, 2500);
       })
   }
 }
