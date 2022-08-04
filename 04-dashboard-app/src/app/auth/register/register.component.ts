@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { emailPattern } from '../../shared/consts'
 import { AuthService } from 'src/app/services/auth.service';
 import { ValidatorService } from 'src/app/services/ui-error-styles.service';
 
@@ -13,7 +14,7 @@ import { ValidatorService } from 'src/app/services/ui-error-styles.service';
 export class RegisterComponent implements OnInit {
 
   registerForm!: FormGroup;
-  emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
+  emailPattern = emailPattern;
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
