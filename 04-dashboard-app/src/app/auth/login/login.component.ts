@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/']);
       })
       .catch(err => {
-        this.customValidator.errorModal(err);
+        this.customValidator.errorModal(err, true, 5000);
         return Object.values( this.loginForm.controls ).forEach( control => {
           control.setValue('');
         });
