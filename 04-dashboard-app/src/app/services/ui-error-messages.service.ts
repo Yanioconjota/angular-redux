@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import Swal from 'sweetalert2'
+import Swal, { SweetAlertIcon } from 'sweetalert2'
 
 @Injectable({
   providedIn: 'root'
@@ -22,19 +22,31 @@ export class UiErrorMessagesService {
     return this.validField(form, fieldName) ? 'text-success fa-check-circle' : 'text-danger fa-times-circle';
   }
 
-  errorModal(err: any, showLoading?: boolean, timer?: number) {
-    const { message } = err;
+  customModal(message: any, title?: string, icon?: SweetAlertIcon | undefined , showLoading?: boolean, timer?: number) {
     Swal.fire({
-      title: 'Error!',
+      title: title || 'Please wait',
       text: message,
-      icon: 'error',
+      icon: icon,
       timer: timer,
       timerProgressBar: showLoading,
       confirmButtonText: 'Cool',
       didOpen: () => {
-        if ( showLoading ) Swal.showLoading()
+        if ( showLoading ) Swal.showLoading();
       },
     });
+  }
+
+  loadingModal() {
+    Swal.fire({
+      title: 'Please wait',
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    })
+  }
+
+  closeModal() {
+    Swal.close();
   }
 
 }
