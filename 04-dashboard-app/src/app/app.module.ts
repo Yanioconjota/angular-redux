@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 //Firebase
 import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore/';
 import { environment } from '../environments/environment';
 
 //Components
@@ -38,6 +39,7 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
     AppRoutingModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
