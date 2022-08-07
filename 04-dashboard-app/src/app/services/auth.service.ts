@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AppState } from '../app.reducer';
+import * as auth from '../auth/auth.actions';
 import { User } from '../models/user.model';
 
 
@@ -11,8 +14,11 @@ import { User } from '../models/user.model';
 })
 export class AuthService {
 
+  subscriber: Subscription | undefined;
+
   constructor(public auth: AngularFireAuth,
-              private firestore: AngularFirestore) { }
+              private firestore: AngularFirestore,
+              private store: Store<AppState>) { }
 
   //Listens to all auth changes
   initAuthListener() {
@@ -21,6 +27,17 @@ export class AuthService {
       if (user) {
         const { uid, email } = user;
         console.log(uid, email);
+        //if we got a fb user we can acces its properties in firebase using its uid.
+        this.subscriber = this.firestore.doc(`${user.uid}/user`).valueChanges().subscribe(fbUser => {
+          //we create a new instance of user with the data received from firebase and dispatch it
+          const user = User.fromFirebase(fbUser);
+          console.log(user);
+          this.store.dispatch(auth.setUser({user}))
+        })
+      } else {
+        //To avoid persisting user data in the store we unsubscribe from the firebase doc call
+        this.store.dispatch(auth.unSetUser());
+        this.subscriber?.unsubscribe();
       }
     })
   }
