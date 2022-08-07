@@ -55,8 +55,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   login(): void {
     if (this.loginForm.invalid) return;
 
-    //this.customValidator.loadingModal();
-
     this.store.dispatch(ui.isLoading());
 
     const { email, password } = this.loginForm.value;
@@ -64,12 +62,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authService.login(email, password)
       .then(credentials => {
         console.log(credentials);
-        //this.customValidator.closeModal();
         this.store.dispatch(ui.stopLoading());
         this.router.navigate(['/']);
       })
       .catch(err => {
-        /* //Firebase error destructuring
+        //Firebase error destructuring
         const { message } = err;
         //Custom modal options
         const modalOptions = {
@@ -82,12 +79,14 @@ export class LoginComponent implements OnInit, OnDestroy {
         //options destructuring
         const { msg, title, icon, showLoading, timer } = modalOptions;
 
-        this.customValidator.customModal(msg, title, icon, showLoading, timer); */
+        this.customValidator.customModal(msg, title, icon, showLoading, timer);
 
         //After modal is triggered we clean the form and activate the required field error
         return Object.values( this.loginForm.controls ).forEach( control => {
           control.setValue('');
+          this.loading = false;
         });
+
       });
   }
 
