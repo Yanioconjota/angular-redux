@@ -74,3 +74,10 @@ When creating a project with firebase Authentication and Firebase DB first do th
     ],
   ```
 17. Make sure your app is OK by running `npm start` or `ng serve`
+
+----
+
+**Note:**
+If you're having some compiling errors in your app.module.ts, don't forget to check you **tsconfig.json**
+
+More info at this [article](https://stackoverflow.com/questions/60239941/appears-in-the-ngmodule-imports-of-appmodule-but-could-not-be-resolved-to-an-ng)
