@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@ngrx/store": "^14.0.2",
     "sweetalert2": "^11.4.24"
   }
 }
