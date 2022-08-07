@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { emailPattern, sweetAlertIcons } from '../../shared/consts'
 import { AuthService } from 'src/app/services/auth.service';
 import { UiErrorMessagesService } from 'src/app/services/ui-error-messages.service';
+import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/app.reducer';
+import * as ui from 'src/app/shared/ui.actions';
 
 @Component({
   selector: 'app-register',
@@ -11,13 +15,16 @@ import { UiErrorMessagesService } from 'src/app/services/ui-error-messages.servi
   styles: [
   ]
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
 
   registerForm!: FormGroup;
   emailPattern = emailPattern;
+  loading = false;
+  subscriber!: Subscription;
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
+              private store: Store<AppState>,
               private router: Router,
               private customValidator: UiErrorMessagesService) { }
 
@@ -27,6 +34,15 @@ export class RegisterComponent implements OnInit {
       email: [ '',  [Validators.required, Validators.pattern(this.emailPattern)] ],
       password: [ '', [Validators.required, Validators.minLength(6)] ]
     });
+
+    this.subscriber = this.store.select('ui').subscribe( ui => {
+      this.loading = ui.isLoading;
+      console.log('loading...')
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscriber.unsubscribe();
   }
 
   showError(field: string) {
@@ -40,18 +56,20 @@ export class RegisterComponent implements OnInit {
   createUser(): void {
     if (this.registerForm.invalid) return;
 
-    this.customValidator.loadingModal();
+    //this.customValidator.loadingModal();
+    this.store.dispatch(ui.isLoading());
 
     const { name, email, password } = this.registerForm.value;
 
     this.authService.createUser(name, email, password)
       .then(credentials => {
         console.log(credentials);
-        this.customValidator.closeModal();
+        //this.customValidator.closeModal();
+        this.store.dispatch(ui.stopLoading());
         this.router.navigate(['/']);
       })
       .catch(err => {
-        //Firebase error destructuring
+        /* //Firebase error destructuring
         const { message } = err;
         //Custom modal options
         const modalOptions = {
@@ -64,7 +82,7 @@ export class RegisterComponent implements OnInit {
         //options destructuring
         const { msg, title, icon, showLoading, timer } = modalOptions;
 
-        this.customValidator.customModal(msg, title, icon, showLoading, timer);
+        this.customValidator.customModal(msg, title, icon, showLoading, timer); */
 
         //After modal is triggered we clean the form and activate the required field error
         return Object.values( this.registerForm.controls ).forEach( control => {
