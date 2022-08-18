@@ -15,6 +15,12 @@ import { User } from '../models/user.model';
 export class AuthService {
 
   subscriber: Subscription | undefined;
+  private _user!: User | null;
+
+  get user() {
+    //prevent alterations on user through spread opeartor
+    return {...this._user};
+  }
 
   constructor(public auth: AngularFireAuth,
               private firestore: AngularFirestore,
@@ -31,11 +37,13 @@ export class AuthService {
         this.subscriber = this.firestore.doc(`${user.uid}/user`).valueChanges().subscribe(fbUser => {
           //we create a new instance of user with the data received from firebase and dispatch it
           const user = User.fromFirebase(fbUser);
+          this._user = user;
           console.log(user);
           this.store.dispatch(auth.setUser({user}))
         })
       } else {
         //To avoid persisting user data in the store we unsubscribe from the firebase doc call
+        this._user = null;
         this.store.dispatch(auth.unSetUser());
         this.subscriber?.unsubscribe();
       }
