@@ -81,3 +81,13 @@ When creating a project with firebase Authentication and Firebase DB first do th
 If you're having some compiling errors in your app.module.ts, don't forget to check you **tsconfig.json**
 
 More info at this [article](https://stackoverflow.com/questions/60239941/appears-in-the-ngmodule-imports-of-appmodule-but-could-not-be-resolved-to-an-ng)
+
+---
+
+## Redux 101
+
+1. Create actions
+2. Define actions behaviour and properties
+3. Create a reducer to handle those actions
+4. Define state handling with received props
+5. Add your reducer to the store which means add the state to the AppState interface and your reducer to the appReducer
