@@ -31,14 +31,14 @@ export class AuthService {
     //receibes a firebase user
     this.auth.authState.subscribe((user)=>{
       if (user) {
-        const { uid, email } = user;
-        console.log(uid, email);
+        const { uid } = user;
+        //console.log(uid, email);
         //if we got a fb user we can acces its properties in firebase using its uid.
-        this.subscriber = this.firestore.doc(`${user.uid}/user`).valueChanges().subscribe(fbUser => {
+        this.subscriber = this.firestore.doc(`${ uid }/user`).valueChanges().subscribe(fbUser => {
           //we create a new instance of user with the data received from firebase and dispatch it
           const user = User.fromFirebase(fbUser);
           this._user = user;
-          console.log(user);
+          //console.log(user);
           this.store.dispatch(auth.setUser({user}))
         })
       } else {
