@@ -33,8 +33,13 @@
 
           <hr>
           <button type="submit" class="btn btn-success mr-2" [disabled]="incomeExpensesForm.invalid">
-            <i class="fa fa-save"></i>
-            Add
+            <span *ngIf="loading">
+              <i class="fa fa-sync fa-spin mr-1"></i>
+              Please wait...
+            </span>
+            <span *ngIf="!loading">
+              <i class="fa fa-save mr-1"></i>Add
+            </span>
           </button>
 
           <!--

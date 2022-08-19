@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { AppState } from '../app.reducer';
 import { IncomeExpenses } from '../models/income-expenses.model';
 import { IncomeExpensesService } from '../services/income-expenses.service';
 import { UiErrorMessagesService } from '../services/ui-error-messages.service';
 import { sweetAlertIcons } from '../shared/consts';
+import * as ui from 'src/app/shared/ui.actions';
 
 @Component({
   selector: 'app-income-expenses',
@@ -11,27 +15,42 @@ import { sweetAlertIcons } from '../shared/consts';
   styles: [
   ]
 })
-export class IncomeExpensesComponent implements OnInit {
+export class IncomeExpensesComponent implements OnInit, OnDestroy {
 
   incomeExpensesForm!: FormGroup;
   type = 'income';
+  loading = false;
+  subscriber!: Subscription;
 
   constructor( private fb: FormBuilder,
                private incomeExpensesService: IncomeExpensesService,
-               private customMessage: UiErrorMessagesService) { }
+               private store: Store<AppState>,
+               private customMessage: UiErrorMessagesService ) { }
 
   ngOnInit(): void {
     this.incomeExpensesForm = this.fb.group({
       description: ['', Validators.required],
       amount: ['', Validators.required]
+    });
 
+    this.subscriber = this.store.select('ui').subscribe( ui => {
+      this.loading = ui.isLoading;
+      console.log('loading...');
     });
 
   }
 
+  ngOnDestroy(): void {
+    this.subscriber.unsubscribe();
+  }
+
   save(): void {
 
+    //Prevents submit when invalid
     if (this.incomeExpensesForm.invalid) { return; }
+
+    //adds a spinner effect to the button
+    this.store.dispatch(ui.isLoading());
 
     const { description, amount } = this.incomeExpensesForm.value;
 
@@ -56,6 +75,9 @@ export class IncomeExpensesComponent implements OnInit {
         const { msg, title, icon, showLoading, timer } = modalOptions;
 
         this.customMessage.customModal(msg, title, icon, showLoading, timer);
+
+        this.store.dispatch(ui.stopLoading());
+        this.type = 'income';
     }).catch( err => {
         //Firebase error destructuring
         const { message } = err;
@@ -71,6 +93,9 @@ export class IncomeExpensesComponent implements OnInit {
         const { msg, title, icon, showLoading, timer } = modalOptions;
 
         this.customMessage.customModal(msg, title, icon, showLoading, timer);
+        this.store.dispatch(ui.stopLoading());
+        this.type = 'income';
+        this.loading = false;
     });
 
   }
