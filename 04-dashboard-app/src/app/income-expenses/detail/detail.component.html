@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col-12">
     <div class="card">
-      <div class="card-body">
+      <div class="card-body table-responsive-sm">
         <h4 class="card-title">Income/Expenses detail</h4>
 
-        <table class="table">
+        <table class="table table-striped">
           <thead>
             <tr>
               <th>Description</th>
@@ -15,11 +15,18 @@
           </thead>
 
           <tbody>
-            <tr>
-              <td>Description</td>
-              <td>Amount</td>
-              <td>Type</td>
-              <td>Actions</td>
+            <tr *ngFor="let item of incomeExpenses"
+                [ngClass]="{'table-danger': item.type === 'expenses', 'table-success' : item.type === 'income'}">
+              <td>{{ item.description }}</td>
+              <td>{{ item.amount | currency: '$' }}</td>
+              <td>{{ item.type }}</td>
+              <td>
+                <button type="button"
+                        (click)="delete(item.uid)"
+                        class="btn btn-danger btn-sm">
+                  <i class="fa fa-trash mr-1"></i>Delete
+                </button>
+              </td>
             </tr>
           </tbody>
 
