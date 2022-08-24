@@ -1,8 +1,12 @@
-import { NgModule } from '@angular/core';
+import { NgModule , LOCALE_ID} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+//Locale
+import { registerLocaleData } from '@angular/common';
+import localeEsAr from '@angular/common/locales/es-AR';
 
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+registerLocaleData(localeEsAr, 'es-Ar');
 
 //Firebase
 import { AngularFireModule } from '@angular/fire/compat';
@@ -51,7 +55,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
     }),
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'es-Ar' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
