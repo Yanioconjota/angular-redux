@@ -5,7 +5,8 @@ import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AppState } from '../app.reducer';
-import * as auth from '../auth/auth.actions';
+import * as authActions from '../auth/auth.actions';
+import * as incomeExpensesActions from '../income-expenses/income-expenses.actions';
 import { User } from '../models/user.model';
 
 
@@ -39,12 +40,13 @@ export class AuthService {
           const user = User.fromFirebase(fbUser);
           this._user = user;
           //console.log(user);
-          this.store.dispatch(auth.setUser({user}))
+          this.store.dispatch(authActions.setUser({user}))
         })
       } else {
         //To avoid persisting user data in the store we unsubscribe from the firebase doc call
         this._user = null;
-        this.store.dispatch(auth.unSetUser());
+        this.store.dispatch(authActions.unSetUser());
+        this.store.dispatch(incomeExpensesActions.unsetItems());
         this.subscriber?.unsubscribe();
       }
     })
