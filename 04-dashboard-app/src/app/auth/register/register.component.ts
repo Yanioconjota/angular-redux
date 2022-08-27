@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { emailPattern, sweetAlertIcons } from '../../shared/consts'
 import { AuthService } from 'src/app/services/auth.service';
-import { UiErrorMessagesService } from 'src/app/services/ui-error-messages.service';
+import { UiMessagesService } from 'src/app/services/ui-messages.service';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducer';
@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
               private authService: AuthService,
               private store: Store<AppState>,
               private router: Router,
-              private customValidator: UiErrorMessagesService) { }
+              private customMessage: UiMessagesService) { }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -46,11 +46,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   showError(field: string) {
-    return this.customValidator.touchedField(this.registerForm, field)
+    return this.customMessage.touchedField(this.registerForm, field)
   }
 
   iconError(fieldName: string) {
-    return this.customValidator.inputValidationStyle(this.registerForm, fieldName);
+    return this.customMessage.inputValidationStyle(this.registerForm, fieldName);
   }
 
   createUser(): void {
@@ -80,7 +80,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         //options destructuring
         const { msg, title, icon, showLoading, timer } = modalOptions;
 
-        this.customValidator.customModal(msg, title, icon, showLoading, timer);
+        this.customMessage.customModal(msg, title, icon, showLoading, timer);
 
         //After modal is triggered we clean the form and activate the required field error
         return Object.values( this.registerForm.controls ).forEach( control => {

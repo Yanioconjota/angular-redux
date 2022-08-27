@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UiErrorMessagesService } from 'src/app/services/ui-error-messages.service';
+import { UiMessagesService } from 'src/app/services/ui-messages.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -13,16 +13,16 @@ export class SidebarComponent implements OnInit {
 
   constructor(private authservice: AuthService,
               private router: Router,
-              private customValidator: UiErrorMessagesService) { }
+              private customMessage: UiMessagesService) { }
 
   ngOnInit(): void {
   }
 
   logout() {
-    this.customValidator.loadingModal();
+    this.customMessage.loadingModal();
     this.authservice.logout().then(() => {
       this.router.navigate(['/login']);
-      this.customValidator.closeModal();
+      this.customMessage.closeModal();
     });
   }
 

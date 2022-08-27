@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { AppState } from 'src/app/app.reducer';
 import { AuthService } from 'src/app/services/auth.service';
-import { UiErrorMessagesService } from 'src/app/services/ui-error-messages.service';
+import { UiMessagesService } from 'src/app/services/ui-messages.service';
 import { emailPattern, sweetAlertIcons } from 'src/app/shared/consts';
 import * as ui from 'src/app/shared/ui.actions';
 
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit, OnDestroy {
               private authService: AuthService,
               private store: Store<AppState>,
               private router: Router,
-              private customValidator: UiErrorMessagesService) { }
+              private customMessage: UiMessagesService) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -45,11 +45,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   showError(field: string) {
-    return this.customValidator.touchedField(this.loginForm, field)
+    return this.customMessage.touchedField(this.loginForm, field)
   }
 
   iconError(fieldName: string) {
-    return this.customValidator.inputValidationStyle(this.loginForm, fieldName);
+    return this.customMessage.inputValidationStyle(this.loginForm, fieldName);
   }
 
   login(): void {
@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         //options destructuring
         const { msg, title, icon, showLoading, timer } = modalOptions;
 
-        this.customValidator.customModal(msg, title, icon, showLoading, timer);
+        this.customMessage.customModal(msg, title, icon, showLoading, timer);
 
         //After modal is triggered we clean the form and activate the required field error
         return Object.values( this.loginForm.controls ).forEach( control => {

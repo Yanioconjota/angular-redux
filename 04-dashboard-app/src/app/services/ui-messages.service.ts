@@ -5,7 +5,7 @@ import Swal, { SweetAlertIcon } from 'sweetalert2'
 @Injectable({
   providedIn: 'root'
 })
-export class UiErrorMessagesService {
+export class UiMessagesService {
 
   constructor() { }
 

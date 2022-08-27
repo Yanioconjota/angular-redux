@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { AppState } from '../app.reducer';
 import { IncomeExpenses } from '../models/income-expenses.model';
 import { IncomeExpensesService } from '../services/income-expenses.service';
-import { UiErrorMessagesService } from '../services/ui-error-messages.service';
+import { UiMessagesService } from '../services/ui-messages.service';
 import { sweetAlertIcons } from '../shared/consts';
 import * as ui from 'src/app/shared/ui.actions';
 
@@ -25,7 +25,7 @@ export class IncomeExpensesComponent implements OnInit, OnDestroy {
   constructor( private fb: FormBuilder,
                private incomeExpensesService: IncomeExpensesService,
                private store: Store<AppState>,
-               private customMessage: UiErrorMessagesService ) { }
+               private customMessage: UiMessagesService ) { }
 
   ngOnInit(): void {
     this.incomeExpensesForm = this.fb.group({
