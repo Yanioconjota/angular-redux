@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs/operators';
 import { AuthService } from './auth.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class IncomeExpensesService {
 
   }
 
-  initIncomeExpensesListener(uid: string | undefined ) {
+  initIncomeExpensesListener(uid: string | undefined ): Observable<IncomeExpenses[]> {
     return this.firestore.collection(`${ uid }/income-expenses/items`)
       //Create a stream of synchronized changes. This method keeps the local array in sorted query order. --> we use it to gather firebase id from item
       .snapshotChanges()
@@ -45,5 +46,11 @@ export class IncomeExpensesService {
           )
         )
       );
+  }
+
+  deleteIncomeExpenses(uidItem: string | undefined): Promise<void> {
+    const uid = this.authService.user.uid;
+
+    return this.firestore.doc(`${ uid }/income-expenses/items/${ uidItem }`).delete();
   }
 }
