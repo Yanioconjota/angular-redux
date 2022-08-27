@@ -19,14 +19,12 @@ export class IncomeExpensesService {
 
     console.log(uid);
 
+    delete incomeExpenses.uid;
+
     //this way we create a new firebase collection by passing its name as a string 'items' and pass the incomeExpenses as a new object
     return this.firestore.doc(`${ uid }/income-expenses`)
         .collection('items')
-        .add({
-          description: incomeExpenses.description,
-          amount: incomeExpenses.amount,
-          type: incomeExpenses.type
-        })
+        .add({...incomeExpenses})
         .then( ref => console.log(`${ref.id} added successfully`))
         .catch(console.warn);
 
