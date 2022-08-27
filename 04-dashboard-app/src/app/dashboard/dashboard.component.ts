@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
               private incomeExpensesService: IncomeExpensesService) { }
 
   ngOnInit(): void {
+    //TODO --> Work on the double subscription
     this.userSubscriber = this.store.select('auth')
       .pipe(
         //we use the pipe operator because the user first appears as null and then we get the data
