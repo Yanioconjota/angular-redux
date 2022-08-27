@@ -19,6 +19,7 @@ export class IncomeExpensesService {
 
     console.log(uid);
 
+    //delete the uid from the object received because it's not expected in the firebase backend
     delete incomeExpenses.uid;
 
     //this way we create a new firebase collection by passing its name as a string 'items' and pass the incomeExpenses as a new object
