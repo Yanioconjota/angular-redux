@@ -7,20 +7,30 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>Description</th>
-              <th>Amount</th>
-              <th (click)="typeSort = !typeSort">
-                <span>
+              <th>
+                <button class="btn btn-sm btn-outline-dark" (click)="sortByType('description')">
+                  Description
+                  <i class="fa" [ngClass]="{'fa-arrow-down': !sortDescriptionArrow,'fa-arrow-up': sortDescriptionArrow }"></i>
+                </button>
+              </th>
+              <th>
+                <button class="btn btn-sm btn-outline-dark" (click)="sortByType('amount')">
+                  Amount
+                  <i class="fa" [ngClass]="{'fa-arrow-down': !sortAmountArrow,'fa-arrow-up': sortAmountArrow }"></i>
+                </button>
+              </th>
+              <th>
+                <button class="btn btn-sm btn-outline-dark" (click)="sortByType('type')">
                   Type
-                   <i class="fa" [ngClass]="{'fa-arrow-down': !typeSort,'fa-arrow-up': typeSort }"></i>
-                </span>
+                   <i class="fa" [ngClass]="{'fa-arrow-down': !sortTypeArrow,'fa-arrow-up': sortTypeArrow }"></i>
+                </button>
               </th>
               <th></th>
             </tr>
           </thead>
 
           <tbody>
-            <tr *ngFor="let item of incomeExpenses | sortIncomeExpenses:typeSort"
+            <tr *ngFor="let item of incomeExpenses | sortIncomeExpenses:sort:sortType"
                 [ngClass]="{'table-danger': item.type === 'expenses', 'table-success' : item.type === 'income'}">
               <td>{{ item.description }}</td>
               <td>{{ item.amount | currency: '$' }}</td>

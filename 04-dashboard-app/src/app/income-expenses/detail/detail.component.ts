@@ -10,15 +10,18 @@ import { sweetAlertIcons } from 'src/app/shared/consts';
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
-  styles: [
-  ]
+  styleUrls: ['./detail.component.scss']
 })
 export class DetailComponent implements OnInit, OnDestroy {
 
   incomeExpenses: IncomeExpenses[] = [];
   subsriber!: Subscription;
 
-  typeSort = false;
+  sortTypeArrow = false;
+  sortAmountArrow = false;
+  sortDescriptionArrow = false;
+  sort = false;
+  sortType = 'type';
 
   constructor(private store: Store<AppState>,
               private incomeExpensesService: IncomeExpensesService,
@@ -34,6 +37,31 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subsriber.unsubscribe();
+  }
+
+  sortByType(type: string):void {
+
+    this.sort = !this.sort;
+    this.sortType = type;
+    switch (type) {
+      case 'type':
+        this.sortTypeArrow = !this.sortTypeArrow;
+        this.sortAmountArrow = false;
+        this.sortDescriptionArrow = false;
+        break;
+
+      case 'amount':
+        this.sortAmountArrow = !this.sortAmountArrow;
+        this.sortTypeArrow = false;
+        this.sortDescriptionArrow = false;
+        break;
+
+      case 'description':
+        this.sortDescriptionArrow = !this.sortDescriptionArrow;
+        this.sortAmountArrow = false;
+        this.sortTypeArrow = false;
+        break;
+    }
   }
 
   delete(item: IncomeExpenses):void {
