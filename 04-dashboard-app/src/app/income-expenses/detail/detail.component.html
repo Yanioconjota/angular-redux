@@ -9,13 +9,18 @@
             <tr>
               <th>Description</th>
               <th>Amount</th>
-              <th>Type</th>
+              <th (click)="typeSort = !typeSort">
+                <span>
+                  Type
+                   <i class="fa" [ngClass]="{'fa-arrow-down': !typeSort,'fa-arrow-up': typeSort }"></i>
+                </span>
+              </th>
               <th></th>
             </tr>
           </thead>
 
           <tbody>
-            <tr *ngFor="let item of incomeExpenses"
+            <tr *ngFor="let item of incomeExpenses | sortIncomeExpenses:typeSort"
                 [ngClass]="{'table-danger': item.type === 'expenses', 'table-success' : item.type === 'income'}">
               <td>{{ item.description }}</td>
               <td>{{ item.amount | currency: '$' }}</td>

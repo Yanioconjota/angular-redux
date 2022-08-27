@@ -27,6 +27,7 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { StoreModule } from '@ngrx/store';
 import { appReducers } from './app.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { SortIncomeExpensesPipe } from './pipes/sort-income-expenses.pipe';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
+    SortIncomeExpensesPipe,
 
   ],
   imports: [
@@ -55,7 +57,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
     }),
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'es-Ar' }],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'es-Ar' },
+    SortIncomeExpensesPipe
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

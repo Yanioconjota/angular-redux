@@ -18,6 +18,8 @@ export class DetailComponent implements OnInit, OnDestroy {
   incomeExpenses: IncomeExpenses[] = [];
   subsriber!: Subscription;
 
+  typeSort = false;
+
   constructor(private store: Store<AppState>,
               private incomeExpensesService: IncomeExpensesService,
               private customMessage: UiMessagesService) { }
