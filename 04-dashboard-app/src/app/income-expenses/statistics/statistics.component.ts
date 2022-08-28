@@ -47,6 +47,11 @@ export class StatisticsComponent implements OnInit, OnDestroy {
 
   generateStatistics(items: IncomeExpenses[]) {
     console.log(items);
+    //Reset value to avoid misscalculation on generateStatistics call --> When manually editing values on firebase these values where incremented everytime since generateStatistics is called by subscription on every store change
+    this.income = 0;
+    this.expenses = 0;
+    this.totalIncome = 0;
+    this.totalExpenses = 0;
 
     for (const item of items) {
       if (item.type === 'income') {
