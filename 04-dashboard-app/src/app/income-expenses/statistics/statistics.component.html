@@ -71,16 +71,20 @@
       </div>
     </div>
   </div>
+</div>
 
-  <div class="col-12 p-5" *ngIf="income > 0 || expenses > 0">
+<div class="row">
+  <div class="col-12 col-md-6" *ngIf="income > 0 || expenses > 0">
     <div class="card card-statistics">
       <div class="card-body">
         <h1 class="card-title">chart</h1>
+        <div style="display: block">
+          <canvas baseChart [data]="doughnutChartData" [type]="doughnutChartType">
+          </canvas>
+        </div>
 
-        <!-- chart ira aquÃ­ -->
 
       </div>
     </div>
   </div>
-
 </div>

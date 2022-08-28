@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducer';
 import { IncomeExpenses } from '../../models/income-expenses.model';
+import { ChartData, ChartEvent, ChartType } from 'chart.js';
 
 @Component({
   selector: 'app-statistics',
@@ -17,6 +18,21 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   totalIncome = 0;
   totalExpenses = 0;
   subscriber!: Subscription;
+  // Doughnut
+  public doughnutChartLabels: string[] = [ 'Income', 'Expenses' ];
+  public doughnutChartData: ChartData<'doughnut'> = {
+    labels: this.doughnutChartLabels,
+    datasets: [{
+      data: [],
+      backgroundColor: [
+        'rgb(89, 131, 232)',
+        'rgb(0, 228, 208)',
+      ],
+       hoverBackgroundColor: '#222',
+       hoverBorderColor: '#222',
+    }]
+  };
+  public doughnutChartType: ChartType = 'doughnut';
 
   constructor(private store: Store<AppState>) { }
 
@@ -40,8 +56,8 @@ export class StatisticsComponent implements OnInit, OnDestroy {
         this.totalExpenses += item.amount;
         this.expenses ++;
       }
-
     }
+    this.doughnutChartData.datasets[0].data = [this.totalIncome, this.totalExpenses];
   }
 
 }
