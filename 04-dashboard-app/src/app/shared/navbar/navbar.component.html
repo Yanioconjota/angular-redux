@@ -13,9 +13,9 @@
 
     <ul class="navbar-nav navbar-nav-right">
 
-      <li class="nav-item d-none d-sm-inline-block">
+      <li *ngIf="userName" class="nav-item d-none d-sm-inline-block">
         <a class="nav-link" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-          <span class="profile-text">Hello, Ron Swanson!</span>
+          <span class="profile-text">Hello, {{ userName }}!</span>
           <img class="img-xs rounded-circle" src="assets/images/faces/ron-swanson.jpg" alt="Profile image">
         </a>
       </li>
