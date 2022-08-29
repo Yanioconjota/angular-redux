@@ -21,8 +21,8 @@ export class SidebarComponent implements OnInit {
   logout() {
     this.customMessage.loadingModal();
     this.authservice.logout().then(() => {
-      this.router.navigate(['/login']);
       this.customMessage.closeModal();
+      this.router.navigate(['/login']);
     });
   }
 

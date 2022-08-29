@@ -1,9 +1,9 @@
 import { Subscription } from 'rxjs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/app.reducer';
 import { IncomeExpenses } from '../../models/income-expenses.model';
-import { ChartData, ChartEvent, ChartType } from 'chart.js';
+import { ChartData, ChartType } from 'chart.js';
+import { AppStateIncomeExpenses } from '../income-expenses.reducer';
 
 @Component({
   selector: 'app-statistics',
@@ -34,7 +34,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   };
   public doughnutChartType: ChartType = 'doughnut';
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppStateIncomeExpenses>) { }
 
   ngOnInit(): void {
 

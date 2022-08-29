@@ -2,10 +2,10 @@ import { Subscription } from 'rxjs';
 import { IncomeExpenses } from './../../models/income-expenses.model';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/app.reducer';
 import { IncomeExpensesService } from '../../services/income-expenses.service';
 import { UiMessagesService } from 'src/app/services/ui-messages.service';
 import { sweetAlertIcons } from 'src/app/shared/consts';
+import { AppStateIncomeExpenses } from '../income-expenses.reducer';
 
 @Component({
   selector: 'app-detail',
@@ -23,7 +23,7 @@ export class DetailComponent implements OnInit, OnDestroy {
   sort = false;
   sortType = 'type';
 
-  constructor(private store: Store<AppState>,
+  constructor(private store: Store<AppStateIncomeExpenses>,
               private incomeExpensesService: IncomeExpensesService,
               private customMessage: UiMessagesService) { }
 

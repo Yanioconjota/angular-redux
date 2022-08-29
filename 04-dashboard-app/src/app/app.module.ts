@@ -36,7 +36,7 @@ import { IncomeExpensesModule } from './income-expenses/income-expenses.module';
     BrowserModule,
     AppRoutingModule,
     AuthModule,
-    IncomeExpensesModule,
+    //IncomeExpensesModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     NgChartsModule,

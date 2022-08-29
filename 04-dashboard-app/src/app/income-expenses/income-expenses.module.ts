@@ -15,6 +15,9 @@ import { SharedModule } from '../shared/shared.module';
 
 //Custom Pipe
 import { SortIncomeExpensesPipe } from '../pipes/sort-income-expenses.pipe';
+import { DashboardRoutingModule } from './dashboard/dashboard-routing.module';
+import { StoreModule } from '@ngrx/store';
+import { incomeExpensesReducer } from './income-expenses.reducer';
 
 
 
@@ -29,8 +32,9 @@ import { SortIncomeExpensesPipe } from '../pipes/sort-income-expenses.pipe';
   imports: [
     CommonModule,
     SharedModule,
+    StoreModule.forFeature('incomeExpenses', incomeExpensesReducer),
     ReactiveFormsModule,
-    AppRoutingModule,
+    DashboardRoutingModule,
     NgChartsModule
   ],
   exports: [
