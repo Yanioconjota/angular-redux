@@ -15,8 +15,6 @@ import { environment } from '../environments/environment';
 
 //Components
 import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { IncomeExpensesComponent } from './income-expenses/income-expenses.component';
 import { StatisticsComponent } from './income-expenses/statistics/statistics.component';
@@ -24,17 +22,23 @@ import { DetailComponent } from './income-expenses/detail/detail.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
+
+//NgRx
 import { StoreModule } from '@ngrx/store';
 import { appReducers } from './app.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
+//Pipes
 import { SortIncomeExpensesPipe } from './pipes/sort-income-expenses.pipe';
+
 import { NgChartsModule } from 'ng2-charts';
+
+//Custom Modules
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
     DashboardComponent,
     IncomeExpensesComponent,
     StatisticsComponent,
@@ -49,6 +53,7 @@ import { NgChartsModule } from 'ng2-charts';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    AuthModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     NgChartsModule,
