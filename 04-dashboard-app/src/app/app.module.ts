@@ -1,5 +1,6 @@
 import { NgModule , LOCALE_ID} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+
 //Locale
 import { registerLocaleData } from '@angular/common';
 import localeEsAr from '@angular/common/locales/es-AR';
@@ -15,40 +16,27 @@ import { environment } from '../environments/environment';
 
 //Components
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { IncomeExpensesComponent } from './income-expenses/income-expenses.component';
-import { StatisticsComponent } from './income-expenses/statistics/statistics.component';
-import { DetailComponent } from './income-expenses/detail/detail.component';
 
 //NgRx
 import { StoreModule } from '@ngrx/store';
 import { appReducers } from './app.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-//Pipes
-import { SortIncomeExpensesPipe } from './pipes/sort-income-expenses.pipe';
-
 import { NgChartsModule } from 'ng2-charts';
 
 //Custom Modules
 import { AuthModule } from './auth/auth.module';
-import { SharedModule } from './shared/shared.module';
+import { IncomeExpensesModule } from './income-expenses/income-expenses.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
-    IncomeExpensesComponent,
-    StatisticsComponent,
-    DetailComponent,
-    SortIncomeExpensesPipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
     AuthModule,
-    SharedModule,
+    IncomeExpensesModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     NgChartsModule,
@@ -60,8 +48,7 @@ import { SharedModule } from './shared/shared.module';
     }),
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'es-Ar' },
-    SortIncomeExpensesPipe
+    { provide: LOCALE_ID, useValue: 'es-Ar' }
 ],
   bootstrap: [AppComponent]
 })

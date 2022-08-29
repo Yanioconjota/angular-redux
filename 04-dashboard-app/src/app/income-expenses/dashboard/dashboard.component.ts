@@ -1,10 +1,10 @@
 import { Subscription } from 'rxjs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from '../app.reducer';
+import { AppState } from '../../app.reducer';
 import { filter } from 'rxjs/operators';
-import { IncomeExpensesService } from '../services/income-expenses.service';
-import * as incomeExpensesActions from '../income-expenses/income-expenses.actions';
+import { IncomeExpensesService } from '../../services/income-expenses.service';
+import * as incomeExpensesActions from '../income-expenses.actions';
 
 @Component({
   selector: 'app-dashboard',
