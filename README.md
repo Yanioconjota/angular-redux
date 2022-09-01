@@ -91,3 +91,7 @@ More info at this [article](https://stackoverflow.com/questions/60239941/appears
 3. Create a reducer to handle those actions
 4. Define state handling with received props
 5. Add your reducer to the store which means add the state to the AppState interface and your reducer to the appReducer
+
+## NgRx Effects
+
+<!-- ![NgRx Effects](http://janioisacura.com/pics/ngrx/ngrx-effects.png) -->
