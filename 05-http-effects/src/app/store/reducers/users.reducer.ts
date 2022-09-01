@@ -16,7 +16,7 @@ export const usersInitialState: UsersState = {
   error: null
 }
 
-export const counterReducer = createReducer(usersInitialState,
+export const usersReducer = createReducer(usersInitialState,
 
     on(loadUsers, state => ({ ...state, loading: true })),
 
