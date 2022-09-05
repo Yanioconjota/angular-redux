@@ -94,4 +94,4 @@ More info at this [article](https://stackoverflow.com/questions/60239941/appears
 
 ## NgRx Effects
 
-<!-- ![NgRx Effects](http://janioisacura.com/pics/ngrx/ngrx-effects.png) -->
+![NgRx Effects](/info/08-effects.png)
