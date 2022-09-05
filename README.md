@@ -95,3 +95,4 @@ More info at this [article](https://stackoverflow.com/questions/60239941/appears
 ## NgRx Effects
 
 ![NgRx Effects](/info/08-effects.png)
+![NgRx Effects](/info/09-effectsExpanded.png)
