@@ -1,4 +1,3 @@
-import { UserService } from './../../services/user.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { Store } from '@ngrx/store';
