@@ -1,1 +1,30 @@
-<p>user works!</p>
+<div *ngIf="loading" class="alert alert-info d-flex justify-content-center">
+  <h4 class="alert-heading m-0">Loading</h4>
+  <span><i class="ml-3 fa fa-sync fa-spin fa-2x"></i></span>
+</div>
+
+<div *ngIf="error" class="alert alert-danger">
+  <h4 class="alert-heading m-0">Error</h4>
+  <p>{{ error.name }}</p>
+  <p>{{ error.url }}</p>
+  <p>{{ error.message }}</p>
+</div>
+
+<div class="row" *ngIf="user">
+  <div class="col-md-2 col-6">
+    <img [src]="user.avatar" class="img-thumbnail w-100" alt="{{ user.first_name }} {{ user.last_name }}" />
+  </div>
+  <div class="col-md-10 col-6">
+    <ul class="list-group">
+      <li class="list-group-item">
+        <p>User: {{ user.first_name }} {{ user.last_name }}</p>
+      </li>
+      <li class="list-group-item">
+        <p>Email: {{ user.email }}</p>
+      </li>
+      <li class="list-group-item">
+        <p>ID: {{ user.id }}</p>
+      </li>
+    </ul>
+  </div>
+</div>

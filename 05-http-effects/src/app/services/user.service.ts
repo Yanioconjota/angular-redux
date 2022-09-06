@@ -19,6 +19,9 @@ export class UserService {
   }
 
   getUserById(id: string) {
-  return this.http.get(`${this.url}/api/users/${id}`)
+    return this.http.get(`${this.url}/api/users/${id}`)
+      .pipe(
+         map((resp: any) => resp.data)
+      )
   }
 }
