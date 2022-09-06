@@ -1,4 +1,16 @@
-<div class="card-columns">
+<div *ngIf="loading" class="alert alert-info d-flex justify-content-center">
+  <h4 class="alert-heading m-0">Loading</h4>
+  <span><i class="ml-3 fa fa-sync fa-spin fa-2x"></i></span>
+</div>
+
+<div *ngIf="error" class="alert alert-danger">
+  <h4 class="alert-heading m-0">Error</h4>
+  <p>{{ error.name }}</p>
+  <p>{{ error.url }}</p>
+  <p>{{ error.message }}</p>
+</div>
+
+<div *ngIf="!loading" class="card-columns">
   <div class="card" *ngFor="let user of users">
     <img [src]="user.avatar" class="card-img-top" alt="{{ user.first_name }} {{ user.last_name }}">
     <div class="card-body">
