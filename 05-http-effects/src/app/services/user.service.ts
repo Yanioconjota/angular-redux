@@ -12,7 +12,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUsers() {
-    return this.http.get(`${this.url}/api/users?per_page=6`)
+    return this.http.get(`${this.url}/api/users?per_page=6&delay=1`)
       .pipe(
         map((resp: any) => resp.data)
       );
