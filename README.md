@@ -38,7 +38,7 @@ When creating a project with firebase Authentication and Firebase DB first do th
 9. register app by creating a name and click register app
 10. Click continue to console
 11. Go to your project console and type: `firebase login`
-12. Then add angular fire to your project: `ng add @angular/fire`
+12. Then add angular fire to your project: by `npm i firebase@9.9.1` and `ng add @angular/fire` 
 13. Select `Authentication` and `Firestore` in the application list when prompted
 14. Select your firebase account `****@email.com` when prompted
 15. Go to your app module and find this blocks:
